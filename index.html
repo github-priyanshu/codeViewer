@@ -56,8 +56,8 @@
 
 
     srh=srh.split("=")[1] || msg.show("The link is not valid.");
-    srh=encodeURI(srh);
-    url=`https://raw.githubusercontent.com/github-priyanshu/youtubecodes/main/${srh || "InfinityText.html"}`;
+    srh=encodeURI(srh) || "InfinityText.html";
+    url=`https://raw.githubusercontent.com/github-priyanshu/youtubecodes/main/${srh}`;
 
     op(".output").innerHTML=`<iframe id="out"></iframe>`;
     var frame=op("iframe#out");
