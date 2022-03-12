@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Awesome Code : code viewer</title>
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body class="flex c body">
+  <div class="head flex">
+    <div class="logo flex" onclick="window.open('https://www.youtube.com/c/AwesomeCode','__blank')">
+      <img src="img/logo.png">
+      <span>Awesome Code</span>
+    </div>
+    <div class="action">
+      <button id="act" class="noBtn" onclick="action(this)">View Code</button>
+    </div>
+  </div>
+  <div class="content">
+    <div class="output active"></div>
+    <div class="code"></div>
+    <span class="loader forceCenter active">Loading...</span>
+  </div>
+  <div class="head footer flex">
+    <div class="logo flex" onclick="window.open('mailto:public.priyanshu@gmail.com','__blank')">
+      <img src="img/pk.png">
+      <span>Priyanshu Kumar</span>
+    </div>
+    <div class="action">
+      <button class="noBtn" onclick="window.open('https://ai-player.netlify.app?sh=14','__blank')">Ai Player</button>
+    </div>  
+  </div>
+  <script src="js/script.js"></script>
+  <script>
+    var srh=location.search,url,code,
+    msgBox=op("span.loader"),
+    codePan=op(".content .code"),
+    copy=`<svg viewBox="0 0 448 512"><path d="M320 448v40c0 13.255-10.745 24-24 24H24c-13.255 0-24-10.745-24-24V120c0-13.255 10.745-24 24-24h72v296c0 30.879 25.121 56 56 56h168zm0-344V0H152c-13.255 0-24 10.745-24 24v368c0 13.255 10.745 24 24 24h272c13.255 0 24-10.745 24-24V128H344c-13.2 0-24-10.8-24-24zm120.971-31.029L375.029 7.029A24 24 0 0 0 358.059 0H352v96h96v-6.059a24 24 0 0 0-7.029-16.97z"></path></svg>`,
+    msg={
+      show:(txt)=>{
+        msgBox.innerText=txt;
+        msgBox.classList.add("active");
+      },
+      hide:()=>{
+        msgBox.classList.remove("active");
+      }
+    },
+    actBtn=op("#act");
+    // actBtn.click();
+
+
+    srh=srh.split("=")[1] || msg.show("The link is not valid.");
+    srh=encodeURI(srh);
+    url=`https://raw.githubusercontent.com/github-priyanshu/compostion/main/index.html`;
+
+    op(".output").innerHTML=`<iframe id="out"></iframe>`;
+    var frame=op("iframe#out");
+
+    fetch(url).then(ret=>ret.text()).then(res=>{
+      frame.contentWindow.document.querySelector("html").innerHTML=res;
+    })
+
+    function action(e){
+      op(".content > div.active").classList.remove("active");
+      if(e.innerText=="View Code"){
+        e.innerText="View Output";
+        loadCode();
+        op(".content .code").classList.add("active");
+      }else{
+        e.innerText="View Code";
+        op(".content .output").classList.add("active");
+      }
+    }
+    function loadCode(){
+      msg.show("Loading...");
+      fetch(url).then(ret=>{return ret.text()}).then(res=>{
+        msg.hide("Loading...");
+        code=res;
+        var html=`<div class="codes"><pre></pre></div><button id="cp" onclick="copyTxt(op('.content .codes pre').innerText)" class="noBtn">${copy}</button>`;
+        codePan.innerHTML="";
+        codePan.insertAdjacentHTML("afterbegin",html);
+        op(".content .codes pre").innerText=res;
+        send("viewed code: "+srh);
+      })
+    }
+
+    function loaded(){
+      op(".code pre").innerText=`<!DOCTYPE html>\n<html lang="en">${op(".output iframe").contentWindow.document.querySelector("html").innerHTML}\n</html>`
+    }
+    function copyTxt(txt) {
+      let elem=document.createElement("textarea");
+      document.body.insertAdjacentElement("beforeend",elem)
+      elem.value=txt;
+      elem.select();
+      elem.setSelectionRange(0, 99999999999999); 
+      document.execCommand("copy");
+      navigator.clipboard.writeText(elem.value);
+      elem.remove();
+      alert("Copied!");
+      send("copied: "+srh);  
+    }
+
+   
+  </script>
+  <script src="js/dataSender.js"></script>
+</body>
+</html>

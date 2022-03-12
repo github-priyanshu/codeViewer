@@ -1,0 +1,112 @@
+html{
+	background: #fff;
+}
+.body {
+	width: 100%;
+	min-height: 100vh;
+	background: #efefef;
+	justify-content: flex-start;
+}
+body > div {
+  box-shadow: 0 0 50px #0002;
+}
+.head{
+	width: 100%;
+	height: 50px;
+	justify-content: space-between;
+	padding: 0 10px;
+	background: #fff;
+}
+.head .logo{
+
+}
+.head .logo img{
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+.head .action button{
+	padding: 7px 12px;
+	border-radius: 99px;
+	background:linear-gradient(45deg,#ae60cb,#6642cb);
+	letter-spacing: .5px;
+	color: #fff;
+	font-size: .8em;
+}
+.head .logo span{
+	color: #444;
+	font-size: 1em;
+	margin-left: 10px;
+}
+
+/*content*/
+.content {
+	width: calc(100% - 40px);
+	height: calc(100vh - 140px);
+	margin: 20px;
+	border-radius: 20px;
+	background: #fff;
+	overflow: hidden;
+}
+.content > div{
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	position: absolute;
+	overflow: auto;
+	display: none;
+}
+.content div.active{
+	display: block;
+}
+.content .loader{
+	background: #444;
+	min-width: 130px;
+	padding: 10px;
+	border-radius: 4px;
+	color: #fff;
+	position: absolute;
+	display: none;
+}
+.content .loader.active{
+	display: block;
+}
+.content .output iframe{
+	width: 100%;
+	height: 100%;
+	border: none;
+}
+
+.content .code .codes{
+	padding: 10px;
+	color: #333;
+}
+#cp{
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	padding: 5px;
+}
+#cp svg{
+	width: 20px;
+	fill: #666;
+}
+
+/*footer*/
+.footer{
+	position: fixed;
+	bottom: 0;
+}
+
+
+@media screen and (max-width: 600px){
+	.content{
+		border-radius: 10px;
+	}
+
+	.head .logo span{
+		font-size: .9em;
+	}
+}
