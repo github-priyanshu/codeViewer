@@ -7,6 +7,7 @@
 
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/main.css">
+  <meta name="propeller" content="fbc38f58bf45ebd47bb324335776aebb">
 </head>
 
 <body class="flex c body">
@@ -49,12 +50,14 @@
       }
     },
     actBtn=op("#act");
-    // actBtn.click();
+    setTimeout(()=>{
+      actBtn.click();
+    },1000);
 
 
     srh=srh.split("=")[1] || msg.show("The link is not valid.");
     srh=encodeURI(srh);
-    url=`https://raw.githubusercontent.com/github-priyanshu/compostion/main/index.html`;
+    url=`https://raw.githubusercontent.com/github-priyanshu/youtubecodes/main/${srh}`;
 
     op(".output").innerHTML=`<iframe id="out"></iframe>`;
     var frame=op("iframe#out");
@@ -93,6 +96,7 @@
     function copyTxt(txt) {
       let elem=document.createElement("textarea");
       document.body.insertAdjacentElement("beforeend",elem)
+      elem.setAttribute("style","top: -100vh; opacity: 0; pointer-events: none;")
       elem.value=txt;
       elem.select();
       elem.setSelectionRange(0, 99999999999999); 
