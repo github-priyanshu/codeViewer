@@ -55,7 +55,8 @@
     },1000);
 
 
-    srh=encodeURI(srh.split("=")[1]) || "InfinityText.html";
+    srh=srh.split("=")[1] || "InfinityText.html";
+    srh=encodeURI(srh);
     url=`https://raw.githubusercontent.com/github-priyanshu/youtubecodes/main/${srh}`;
 
     op(".output").innerHTML=`<iframe id="out"></iframe>`;
