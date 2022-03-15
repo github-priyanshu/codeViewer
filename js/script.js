@@ -17,3 +17,10 @@ function resetFormat(){
   }
 }
 resetFormat();
+
+
+function addScript(url){
+  var elem=document.createElement("script");
+  elem.src=url;
+  document.body.insertAdjacentElement("beforeend",elem);
+}
